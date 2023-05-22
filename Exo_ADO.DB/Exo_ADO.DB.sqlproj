@@ -60,12 +60,14 @@
     <Folder Include="Seeds" />
     <Folder Include="Views" />
     <Folder Include="Triggers" />
+    <Folder Include="Logins" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Student.sql" />
     <Build Include="Tables\Section.sql" />
     <Build Include="Views\V_Student.sql" />
     <Build Include="Triggers\TR_Student_Delete.sql" />
+    <Build Include="Logins\User_Chris.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Seeds\InitialData.PostDeployment.sql" />

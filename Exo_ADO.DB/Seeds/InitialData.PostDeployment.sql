@@ -1,4 +1,26 @@
-﻿INSERT INTO section VALUES (1010, 'Informatique de Gestion');
+﻿-- Creation du login (SQL Server)
+IF NOT EXISTS (SELECT name FROM master.sys.server_principals WHERE name = 'Chris')
+BEGIN
+	CREATE LOGIN  [Chris]
+		WITH PASSWORD=N'Test1234=', 
+		DEFAULT_DATABASE=[Master], 
+		CHECK_EXPIRATION=OFF, 
+		CHECK_POLICY=OFF
+END
+GO
+
+-- Creation de l'utilisateur (Database)
+CREATE USER [Chris] 
+	FOR LOGIN [Chris] 
+	WITH DEFAULT_SCHEMA = [dbo]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [Chris]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [Chris]
+GO
+
+-- Donnée initial
+INSERT INTO section VALUES (1010, 'Informatique de Gestion');
 INSERT INTO section VALUES (1020, 'Comptabilité');
 INSERT INTO section VALUES (1110, 'Tourisme');
 INSERT INTO section VALUES (1120, 'Dessin 3D');
