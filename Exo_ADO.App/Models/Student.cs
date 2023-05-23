@@ -13,5 +13,7 @@ namespace Exo_ADO.App.Models
         public string LastName { get; set; }
         public int YearResult { get; set; }
         public DateTime BirthDate { get; set; }
+
+        public int SectionID { get; set; }
     }
 }
