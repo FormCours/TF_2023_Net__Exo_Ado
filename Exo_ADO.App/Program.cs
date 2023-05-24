@@ -3,11 +3,19 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Reflection.Metadata;
 
-// Définition de la connexion vers la DB
-//string connectionString = @"Data Source=Forma300\TFTIC;Initial Catalog=Exo_ADO;User ID=Chris;Password=Test1234=;TrustServerCertificate=true;";
-string connectionString = @"Data Source=STEVEBSTORM\MSSQLSERVER01;Initial Catalog=Exo_ADO_DB;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+#region Définition de la connexion vers la DB
+/* ConnectionString Centre
+string connectionString = @"Data Source=Forma300\TFTIC;Initial Catalog=Exo_ADO;User ID=Chris;Password=Test1234=;TrustServerCertificate=true;";
+*/
+/* ConnectionString Steve
+ * string connectionString = @"Data Source=STEVEBSTORM\MSSQLSERVER01;Initial Catalog=Exo_ADO_DB;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+ */
+/* ConnectionString LocalDB */
+string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Exo_ADO_DB;Integrated Security=True";
+ 
 
-using(SqlConnection connection = new SqlConnection())
+#endregion
+using (SqlConnection connection = new SqlConnection())
 {
     connection.ConnectionString = connectionString;
 
@@ -97,61 +105,62 @@ using(SqlConnection connection = new SqlConnection())
     };
 
     //Insertion en DB
-    //using(SqlCommand command = connection.CreateCommand())
-    //{
-    //    string query = "INSERT INTO student (FirstName, LastName, BirthDate, YearResult, SectionID) " +
-    //        " OUTPUT inserted.Id " +
-    //        "VALUES(@prenom, '" + moi.LastName + "', '" +
-    //        moi.BirthDate + "', '" + moi.YearResult +"', '" + moi.SectionID+ "')";
+    using (SqlCommand command = connection.CreateCommand())
+    {
+        string query = "INSERT INTO student (FirstName, LastName, BirthDate, YearResult, SectionID) " +
+            " OUTPUT inserted.Id " +
+            "VALUES(@prenom, '" + moi.LastName + "', '" +
+            moi.BirthDate + "', '" + moi.YearResult + "', '" + moi.SectionID + "')";
 
-    //    // command.Parameters.Add
-    //    SqlParameter PPrenom = new SqlParameter()
-    //    {
-    //        ParameterName = "prenom",
-    //        Value = moi.FirstName,
-    //        Direction = ParameterDirection.Input
-    //    };
+        // command.Parameters.Add
+        /*SqlParameter PPrenom = new SqlParameter()
+        {
+            ParameterName = "prenom",
+            Value = moi.FirstName,
+            Direction = ParameterDirection.Input
+        };
 
-    //    command.Parameters.Add(PPrenom);
+        command.Parameters.Add(PPrenom);*/
 
-    //    command.Parameters.AddWithValue("prenom", moi.FirstName);
+        command.Parameters.AddWithValue("prenom", moi.FirstName);
 
-    //    command.CommandText = query;
-    //    connection.Open();
-    //    int id = (int)command.ExecuteScalar();
-    //    connection.Close();
-    //    Console.WriteLine("Nouvel Id : " + id);
-    //}
+        command.CommandText = query;
+        connection.Open();
+        moi.Id = (int)command.ExecuteScalar();
+        connection.Close();
+        Console.WriteLine("Nouvel Id : " + moi.Id);
+    }
 
     //Utilisation Requête parametrée
 
-    //Student voisin = new Student
-    //{
-    //    FirstName = "Arthur",
-    //    LastName = "Pendragon",
-    //    BirthDate = new DateTime(2000, 01, 01),
-    //    YearResult = 19,
-    //    SectionID = 1010
-    //};
-
-    //using(SqlCommand command = connection.CreateCommand())
-    //{
-    //    command.CommandText = "INSERT INTO student (FirstName, LastName, BirthDate, YearResult, SectionID) " +
-    //        "VALUES (@FirstName, @LastName, @BirthDate, @YearResult, @SectionId)";
-
-    //    command.Parameters.AddWithValue("FirstName", voisin.FirstName);
-    //    command.Parameters.AddWithValue("LastName", voisin.LastName);
-    //    command.Parameters.AddWithValue("BirthDate", voisin.BirthDate);
-    //    command.Parameters.AddWithValue("YearResult", voisin.YearResult);
-    //    command.Parameters.AddWithValue("SectionId", voisin.SectionID);
-
-    //    connection.Open();
-
-    //    command.ExecuteNonQuery();
-    //    connection.Close();
-    //}
+    Student voisin = new Student
+    {
+        FirstName = "Arthur",
+        LastName = "Pendragon",
+        BirthDate = new DateTime(2000, 01, 01),
+        YearResult = 19,
+        SectionID = 1010
+    };
 
     using (SqlCommand command = connection.CreateCommand())
+    {
+        command.CommandText = "INSERT INTO student (FirstName, LastName, BirthDate, YearResult, SectionID) " +
+            "OUTPUT [inserted].[Id] "+
+            "VALUES (@FirstName, @LastName, @BirthDate, @YearResult, @SectionId)";
+
+        command.Parameters.AddWithValue("FirstName", voisin.FirstName);
+        command.Parameters.AddWithValue("LastName", voisin.LastName);
+        command.Parameters.AddWithValue("BirthDate", voisin.BirthDate);
+        command.Parameters.AddWithValue("YearResult", voisin.YearResult);
+        command.Parameters.AddWithValue("SectionId", voisin.SectionID);
+
+        connection.Open();
+
+        voisin.Id = (int)command.ExecuteScalar();
+        connection.Close();
+    }
+
+    /*using (SqlCommand command = connection.CreateCommand())
     {
         command.CommandText = "DELETE FROM student WHERE Id = 27";
         connection.Open();
@@ -164,6 +173,53 @@ using(SqlConnection connection = new SqlConnection())
             Console.WriteLine(ex.Message);
         }
         connection.Close();
+    }*/
+
+    moi.SectionID = 1320;
+
+    using (SqlCommand command = connection.CreateCommand())
+    {
+        command.CommandText = "SP_Student_Update";
+        command.CommandType = CommandType.StoredProcedure;
+        SqlParameter sp_id = new SqlParameter("id", moi.Id);
+        command.Parameters.Add(sp_id);
+        SqlParameter sp_yr = new SqlParameter("year_result", moi.YearResult);
+        command.Parameters.Add(sp_yr);
+        SqlParameter sp_section = new SqlParameter("section_id", moi.SectionID);
+        command.Parameters.Add(sp_section);
+
+        connection.Open();
+        int update_row = command.ExecuteNonQuery();
+
+        connection.Close();
+
+        if (update_row > 0) Console.WriteLine("Mis à jour!");
     }
 
+    using (SqlCommand command = connection.CreateCommand())
+    {
+        command.CommandType = CommandType.StoredProcedure;
+        command.CommandText = "SP_Student_Delete";
+        command.Parameters.AddWithValue("id",voisin.Id);
+
+        connection.Open() ;
+        int delete_row = command.ExecuteNonQuery();
+        connection.Close();
+
+        if (delete_row > 0) Console.WriteLine("Suppression effecutée");
+    }
+
+    using (SqlCommand command = connection.CreateCommand())
+    {
+        command.CommandText = "SELECT * FROM [V_Student]";
+        connection.Open();
+        using (SqlDataReader reader = command.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                Console.WriteLine($"{reader["Id"]} : {reader["FirstName"]} {reader["LastName"]}");
+            }
+        }
+        connection.Close() ;
+    }
 }

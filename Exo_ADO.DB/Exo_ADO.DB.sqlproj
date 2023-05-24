@@ -68,11 +68,14 @@
     <Build Include="Views\V_Student.sql" />
     <Build Include="Triggers\TR_Student_Delete.sql" />
     <Build Include="StoredProc\AddSection.sql" />
+    <Build Include="StoredProc\SP_Student_Update.sql" />
+    <Build Include="StoredProc\SP_Student_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Seeds\InitialData.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Exo_ADO.DB.publish.xml" />
+    <None Include="Exo_ADO.LocalDB.publish.xml" />
   </ItemGroup>
 </Project>
