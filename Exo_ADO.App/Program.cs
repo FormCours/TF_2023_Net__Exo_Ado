@@ -223,6 +223,6 @@ using (SqlConnection connection = new SqlConnection())
                 Console.WriteLine($"{reader["Id"]} : {reader["FirstName"]} {reader["LastName"]}");
             }
         }
-        connection.Close() ;
+        connection.Close()
     }
 }

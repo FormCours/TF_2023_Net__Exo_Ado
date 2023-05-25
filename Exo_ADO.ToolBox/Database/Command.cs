@@ -33,6 +33,7 @@ namespace Exo_ADO.ToolBox.Database
         public void AddParameter(string key, object? value)
         {
             _Parameters.Add(key, value ?? DBNull.Value);
+
             //_Parameters.Add(key, value is null ? DBNull.Value : value);
         }
     }

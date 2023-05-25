@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Exo_ADO.DB", "Exo_ADO.DB\Exo_ADO.DB.sqlproj", "{260C4DF3-CA49-4297-8B5F-6B2A8A6EC0D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exo_ADO.App", "Exo_ADO.App\Exo_ADO.App.csproj", "{504D6103-3F04-412C-8B7B-C9C91DC4B6DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exo_ADO.App", "Exo_ADO.App\Exo_ADO.App.csproj", "{504D6103-3F04-412C-8B7B-C9C91DC4B6DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exo_ADO.ToolBox", "Exo_ADO.ToolBox\Exo_ADO.ToolBox.csproj", "{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{504D6103-3F04-412C-8B7B-C9C91DC4B6DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{504D6103-3F04-412C-8B7B-C9C91DC4B6DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{504D6103-3F04-412C-8B7B-C9C91DC4B6DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
