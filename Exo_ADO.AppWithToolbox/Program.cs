@@ -1,4 +1,5 @@
-﻿using Exo_ADO.AppWithToolbox.Models;
+﻿using Exo_ADO.AppWithToolbox.DemoLinQ;
+using Exo_ADO.AppWithToolbox.Models;
 using Exo_ADO.ToolBox.Database;
 using static System.Collections.Specialized.BitVector32;
 
@@ -42,9 +43,20 @@ IEnumerable<Student> nullos = db.ExecuteReader(cmd2, (record) =>
     };
 });
 
-foreach(Student student in nullos)
+IEnumerable<Student> test = nullos.Filter((student) => student.YearResult % 2 == 0);
+
+Console.WriteLine("- Nullos");
+foreach (Student student in nullos)
 {
-    Console.WriteLine($"{student.Id} : {student.FirstName} {student.LastName}");
+    Console.WriteLine($"{student.Id} : {student.FirstName} {student.LastName} {student.YearResult}");
+}
+Console.WriteLine();
+
+
+Console.WriteLine("- Nullos + Filter");
+foreach (Student student in test)
+{
+    Console.WriteLine($"{student.Id} : {student.FirstName} {student.LastName} {student.YearResult}");
 }
 #endregion
 
