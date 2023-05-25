@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exo_ADO.App", "Exo_ADO.App\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exo_ADO.ToolBox", "Exo_ADO.ToolBox\Exo_ADO.ToolBox.csproj", "{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exo_ADO.AppWithToolbox", "Exo_ADO.AppWithToolbox\Exo_ADO.AppWithToolbox.csproj", "{4A62E457-7161-413F-87FB-6DBE5182EF66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DB021CB-8C62-4C6E-9A0F-BDA2D67905D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A62E457-7161-413F-87FB-6DBE5182EF66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A62E457-7161-413F-87FB-6DBE5182EF66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A62E457-7161-413F-87FB-6DBE5182EF66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A62E457-7161-413F-87FB-6DBE5182EF66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
