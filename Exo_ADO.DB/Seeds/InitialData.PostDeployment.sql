@@ -18,6 +18,8 @@ ALTER ROLE [db_datareader] ADD MEMBER [Chris]
 GO
 ALTER ROLE [db_datawriter] ADD MEMBER [Chris]
 GO
+GRANT EXECUTE ON SCHEMA::[dbo] TO [Chris]
+GO
 
 -- Donnée initial
 INSERT INTO section VALUES (1010, 'Informatique de Gestion');

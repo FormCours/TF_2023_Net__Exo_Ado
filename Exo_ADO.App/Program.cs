@@ -4,15 +4,15 @@ using System.Data;
 using System.Reflection.Metadata;
 
 #region Définition de la connexion vers la DB
-/* ConnectionString Centre
+/* ConnectionString Centre */
 string connectionString = @"Data Source=Forma300\TFTIC;Initial Catalog=Exo_ADO;User ID=Chris;Password=Test1234=;TrustServerCertificate=true;";
-*/
+
 /* ConnectionString Steve
  * string connectionString = @"Data Source=STEVEBSTORM\MSSQLSERVER01;Initial Catalog=Exo_ADO_DB;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
  */
-/* ConnectionString LocalDB */
+/* ConnectionString LocalDB
 string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Exo_ADO_DB;Integrated Security=True";
- 
+  */
 
 #endregion
 using (SqlConnection connection = new SqlConnection())
@@ -208,7 +208,10 @@ using (SqlConnection connection = new SqlConnection())
 
         if (delete_row > 0) Console.WriteLine("Suppression effecutée");
     }
+    Console.WriteLine();
 
+    Console.WriteLine("  Check");
+    Console.WriteLine("  *****");
     using (SqlCommand command = connection.CreateCommand())
     {
         command.CommandText = "SELECT * FROM [V_Student]";
